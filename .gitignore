@@ -1,0 +1,14 @@
+# Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# PHP
+backend/vendor/    # if using Composer
+backend/.env       # for DB credentials or secrets
+backend/uploads/   # if any uploaded files
+
+# OS / IDE
+.DS_Store
+.idea/
+*.log
