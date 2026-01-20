@@ -1,0 +1,32 @@
+<button><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter un Client</button>
+<div class="table-container">
+<table class="custom-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Telephone</th>
+        <th>Adress</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (client of clients; track client.id) {
+        <tr>
+          <td>{{$index+1}}</td>
+          <th>{{client.id}}</th>
+          <td>{{client.name}}</td>
+          <td>{{client.email}}</td>
+          <td>{{client.telephone}}</td>
+          <td>{{client.address}}</td>
+          <td class="edit-btn" (click)="openClientModal(client)"><i class="fas fa-edit"></i></td>
+          <td class="delete-btn" ><i class="fa-regular fa-trash-can"></i></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

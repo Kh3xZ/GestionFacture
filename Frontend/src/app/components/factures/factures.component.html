@@ -1,4 +1,51 @@
-<button  style="background-color: #FFA529;color: white;padding: 10px;border-radius: 10px;border: 1px solid transparent;cursor: pointer;width: 95%;;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;font-size: 18px;margin-left: 1%;margin-top: 10px;"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter une Facture</button>
+<button class="ajouter"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter une Facture</button>
+@if (modalservice.facturemodal) {
+  <div class="form-card-container">
+    <div class="form-header">
+      <h3><i class="fas fa-file-invoice"></i> Détails de la Facture</h3>
+    </div>
+    
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Issue Date</label>
+        <input type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Due Date</label>
+        <input type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select>
+          <option value="paid">Paid</option>
+          <option value="pending">Pending</option>
+          <option value="overdue">Overdue</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Total Amount</label>
+        <div class="input-with-icon">
+          <input type="number" placeholder="0.00">
+          <span class="currency-label">€</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="submit-btn">
+        <i class="fas fa-check"></i> Confirmer
+      </button>
+      <button type="button" class="close-btn" (click)="close()">
+        <i class="fas fa-times"></i> Annuler
+      </button>
+    </div>
+  </div>
+}
+
+<div class="table-container">
 <table class="custom-table">
     <thead>
       <tr>
@@ -22,12 +69,18 @@
           <td>{{facture.client_id}}</td>
           <td>{{facture.issue_date}}</td>
           <td>{{facture.due_date}}</td>
-          <td>{{facture.status}}</td>
+          @if (facture.status == "paid"){
+            <td><span style="color: green;"><i class="fa-regular fa-circle-check"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
+          }@else if (facture.status == "pending"){
+            <td><span style="color: orange;"><i class="fa-solid fa-spinner"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
+          }@else{
+            <td><span style="color: tomato;"><i class="fa-regular fa-clock"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
+          }
           <td>{{facture.total_amount}}</td>
-          <td class="edit-btn" ><i class="fas fa-edit"></i></td>
+          <td class="edit-btn" (click)="openFactureModal(facture)"><i class="fas fa-edit"></i></td>
           <td class="delete-btn" ><i class="fa-regular fa-trash-can"></i></td>
         </tr>
       }
     </tbody>
   </table>
-
+</div>

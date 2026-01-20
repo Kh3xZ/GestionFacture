@@ -5,7 +5,7 @@
     padding-top: 80px;
     margin-left: 10px;
     position: fixed;
-    background-color: #ffffff;
+    background-color: #222222;
 }
 
 .sidebar-menu table {
@@ -22,31 +22,31 @@
 .sidebar-menu td {
   padding: 15px;
   font-family: 'Poppins-light', sans-serif;
-  color: #3B3B3B;
+  color: #F5F5F5;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .sidebar-menu i {
-  color: #808080;
+  color: #F5F5F5;
   font-size: 20px;
 }
 
 .sidebar-menu tr:hover td {
   background-color: #2563EB;
-  color: white;
+  color: #F5F5F5;
 }
 
 .sidebar-menu tr:hover i {
-  color: white;
+  color: #F5F5F5;
 }
 
 .sidebar-menu tr.active-link td {
   background-color: #2563EB;
-  color: white;
+  color: #F5F5F5;
 }
 
 .sidebar-menu tr.active-link i {
-  color: white;
+  color: #F5F5F5;
 }
 
 .sidebar-menu tr td:first-child {
@@ -67,5 +67,13 @@
 .sidebar-menu .text {
   font-size: 20px;
   font-weight: 500;
+}
+
+.user-information{
+  color: #F5F5F5;
+  background-color: #3B3B3B ;
+  height: 8%;
+  border: #222222;
+  border-radius: 15px;
 }
 

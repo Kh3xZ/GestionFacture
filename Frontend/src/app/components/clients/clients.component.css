@@ -1,0 +1,82 @@
+button {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  width: 94.5%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  font-size: 18px;
+  margin-left: 1%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+.custom-table {
+  width: 95%;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+  background-color: #2E2E2E;
+  color: #F5F5F5;
+}
+
+.custom-table thead {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+.custom-table th, .custom-table td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #333333;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #3B3B3B;
+  transition: 0.2s ease-in-out;
+}
+
+.edit-btn {
+  color: #2563EB;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.delete-btn {
+  color: #dc2626;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: #b91c1c;
+  text-decoration: underline;
+}
+
+.main-container {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+}
+
+.table-container {
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+}

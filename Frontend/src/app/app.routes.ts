@@ -4,6 +4,7 @@ import { layout } from './layout';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FacturesComponent } from './components/factures/factures.component';
 import { AuthGuard } from './auth.guard';
+import { ClientsComponent } from './components/clients/clients.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'Factures', pathMatch: 'full' },
       { path: 'Dashboard', component: DashboardComponent },
       { path: 'Factures', component: FacturesComponent },
+      { path: 'Clients', component: ClientsComponent }
     ]
   },
 

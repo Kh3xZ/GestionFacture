@@ -15,6 +15,9 @@ export class ApiService {
     getFactures(): Observable<any> {
     return this.http.get<any>(`${this.BaseUrl}/factures.php`);
     }
+    getClients(): Observable<any> {
+    return this.http.get<any>(`${this.BaseUrl}/clients.php`);
+    }
 
 
 }
