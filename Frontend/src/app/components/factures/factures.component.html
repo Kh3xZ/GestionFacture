@@ -1,41 +1,64 @@
-<button class="ajouter"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter une Facture</button>
+<button (click)="openAdd()" class="ajouter">
+  <i class="fa-solid fa-plus"></i> Ajouter une Facture
+</button>
+
 @if (modalservice.facturemodal) {
   <div class="form-card-container">
     <div class="form-header">
       <h3><i class="fas fa-file-invoice"></i> Détails de la Facture</h3>
     </div>
-    
     <div class="form-grid">
+        <div class="form-group">
+        <label>Client</label>
+        @if (modalservice.factureType == "edit"){
+        <select [(ngModel)]="factureEdit.client_name">
+          @for (Client of Clients; track Client.id) {
+          <option>{{Client.name}}</option>
+          }
+        </select>
+      }@else{
+        <select [(ngModel)]="factureAdd.client_id">
+          @for (Client of Clients; track Client.id) {
+          <option value="{{Client.id}}">{{Client.name}}&nbsp;&nbsp;&nbsp;{{Client.email}}</option>
+          }
+        </select>
+      }
+      </div>
       <div class="form-group">
         <label>Issue Date</label>
-        <input type="date">
+        @if (modalservice.factureType == "edit"){
+        <input type="date" value="{{factureEdit.issue_date}}" [(ngModel)]="factureEdit.issue_date">
+        }@else{
+          <input type="date" [(ngModel)]="factureAdd.issue_date">
+        }
       </div>
-
       <div class="form-group">
         <label>Due Date</label>
-        <input type="date">
+        @if (modalservice.factureType == "edit"){
+        <input type="date" value="{{factureEdit.due_date}}" [(ngModel)]="factureEdit.due_date">
+        }@else{
+          <input type="date" [(ngModel)]="factureAdd.due_date">
+        }
       </div>
-
       <div class="form-group">
         <label>Status</label>
-        <select>
+        @if (modalservice.factureType == "edit"){
+        <select [(ngModel)]="factureEdit.status">
           <option value="paid">Paid</option>
           <option value="pending">Pending</option>
           <option value="overdue">Overdue</option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label>Total Amount</label>
-        <div class="input-with-icon">
-          <input type="number" placeholder="0.00">
-          <span class="currency-label">€</span>
-        </div>
+        }@else{
+          <select [(ngModel)]="factureAdd.status">
+          <option value="paid">Paid</option>
+          <option value="pending">Pending</option>
+          <option value="overdue">Overdue</option>
+        </select>
+        }
       </div>
     </div>
-
     <div class="form-actions">
-      <button type="button" class="submit-btn">
+      <button type="button" class="submit-btn" (click)="add()">
         <i class="fas fa-check"></i> Confirmer
       </button>
       <button type="button" class="close-btn" (click)="close()">
@@ -46,7 +69,7 @@
 }
 
 <div class="table-container">
-<table class="custom-table">
+  <table class="custom-table">
     <thead>
       <tr>
         <th>#</th>
@@ -60,26 +83,24 @@
         <th>Supprimer</th>
       </tr>
     </thead>
-
     <tbody>
       @for (facture of factures; track facture.id) {
-        <tr>
-          <td>{{$index+1}}</td>
-          <th>{{facture.id}}</th>
-          <td>{{facture.client_id}}</td>
-          <td>{{facture.issue_date}}</td>
-          <td>{{facture.due_date}}</td>
-          @if (facture.status == "paid"){
-            <td><span style="color: green;"><i class="fa-regular fa-circle-check"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
-          }@else if (facture.status == "pending"){
-            <td><span style="color: orange;"><i class="fa-solid fa-spinner"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
-          }@else{
-            <td><span style="color: tomato;"><i class="fa-regular fa-clock"></i>&nbsp;&nbsp;{{facture.status}}</span></td>
-          }
-          <td>{{facture.total_amount}}</td>
-          <td class="edit-btn" (click)="openFactureModal(facture)"><i class="fas fa-edit"></i></td>
-          <td class="delete-btn" ><i class="fa-regular fa-trash-can"></i></td>
-        </tr>
+      <tr>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{$index + 1}}</td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.id}}</td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.client_name}}</td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.issue_date | date}}</td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.due_date | date}}</td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">
+          <span [ngStyle]="{'color': facture.status === 'paid' ? 'green' : facture.status === 'pending' ? 'orange' : 'tomato'}">
+            <i class="fa-regular" [ngClass]="{'fa-circle-check': facture.status === 'paid', 'fa-spinner': facture.status === 'pending', 'fa-clock': facture.status === 'overdue'}"></i>
+            {{facture.status}}
+          </span>
+        </td>
+        <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.total_amount}}&nbsp;DT</td>
+        <td class="edit-btn" (click)="openFactureModalEdit(facture)"><i class="fas fa-edit"></i></td>
+        <td class="delete-btn" (click)="delete(facture)"><i class="fa-regular fa-trash-can"></i></td>
+      </tr>
       }
     </tbody>
   </table>
