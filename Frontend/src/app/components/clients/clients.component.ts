@@ -21,6 +21,7 @@ export class ClientsComponent {
         this.clients = data;
         this.cd.detectChanges();
     });
+    
 }
 openClientModal(client: Client){
     this.modalservice.setClient(client);

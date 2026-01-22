@@ -93,7 +93,13 @@
         <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.due_date | date}}</td>
         <td [routerLink]="['/Factures/Facture', facture.id]">
           <span [ngStyle]="{'color': facture.status === 'paid' ? 'green' : facture.status === 'pending' ? 'orange' : 'tomato'}">
-            <i class="fa-regular" [ngClass]="{'fa-circle-check': facture.status === 'paid', 'fa-spinner': facture.status === 'pending', 'fa-clock': facture.status === 'overdue'}"></i>
+            @if(facture.status=="pending"){
+              <i class="fa-solid fa-spinner fa-spin"></i>
+            }@else if (facture.status === 'paid'){
+              <i class="fa-solid fa-circle-check"></i>
+            }@else{
+              <i class="fa-solid fa-calendar-minus"></i>
+            }
             {{facture.status}}
           </span>
         </td>

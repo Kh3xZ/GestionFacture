@@ -33,6 +33,7 @@ export class FacturesComponent implements OnInit {
       this.Clients = data;
     });
     this.loadFactures();
+    
   }
 
   loadFactures() {
@@ -47,15 +48,16 @@ export class FacturesComponent implements OnInit {
             map(res => ({
               ...f,
               client_name: res.client.name,
-              total_amount: res.total.totalamount
+              total_amount: res.total.total_amount
             }))
           )
         );
         return forkJoin(detailRequests);
       })
     ).subscribe({
-      next: (fullFactures) => {
+      next: (fullFactures) => { 
         this.factures = fullFactures;
+        console.log(this.factures)
         this.cd.detectChanges();
       },
       error: (err) => console.error("Error loading factures details:", err)

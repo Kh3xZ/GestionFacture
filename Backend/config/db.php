@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$db_name = "gestion-facture";
+$db_name = "gestion_facture";
 $username = "root";
 $password = "";
 
