@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Service } from '../models/service.model';
 import { Facture } from '../models/facture.model';
+import { Client } from '../models/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,9 @@ export class ApiService {
     }
     editFacture(facture: Facture): Observable<any> {
       return this.http.post<any>(`${this.BaseUrl}/editFacture.php`, { facture });
+    }
+    editClient(client:Client):Observable<any> {
+      return this.http.post<any>(`${this.BaseUrl}/editClient.php`, { client });
     }
 
 }

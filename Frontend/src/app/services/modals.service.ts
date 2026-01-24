@@ -12,6 +12,7 @@ export class ModalService {
   clientModal: boolean;
   serviceModal: boolean;
   serviceType: String = "";
+  clientType: String = "";
   factureType: String = "";
 
   private facture!: Facture;

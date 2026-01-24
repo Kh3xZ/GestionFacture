@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalService } from '../../services/modals.service';
 import { Client } from '../../models/client.model';
 import { ApiService } from '../../services/api.service';
+import { Facture } from '../../models/facture.model';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class ClientModal {
   close(){
     this.modalservice.clientModal = false;
   }
+  
 
   modifier(){
   }
