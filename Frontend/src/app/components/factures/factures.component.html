@@ -58,9 +58,15 @@
       </div>
     </div>
     <div class="form-actions">
-      <button type="button" class="submit-btn" (click)="add()">
+      @if (modalservice.factureType == "edit"){
+        <button type="button" class="submit-btn" (click)="edit()">
         <i class="fas fa-check"></i> Confirmer
       </button>
+      }@else{
+        <button type="button" class="submit-btn" (click)="add()">
+        <i class="fas fa-check"></i> Confirmer
+      </button>
+      }
       <button type="button" class="close-btn" (click)="close()">
         <i class="fas fa-times"></i> Annuler
       </button>
@@ -85,7 +91,7 @@
     </thead>
     <tbody>
       @for (facture of factures; track facture.id) {
-      <tr>
+      <tr style="cursor: pointer;">
         <td [routerLink]="['/Factures/Facture', facture.id]">{{$index + 1}}</td>
         <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.id}}</td>
         <td [routerLink]="['/Factures/Facture', facture.id]">{{facture.client_name}}</td>

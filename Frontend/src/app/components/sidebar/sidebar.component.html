@@ -1,11 +1,13 @@
 <div class="user-information">
     <div style="display: flex; align-items: center; padding: 10px;">
   <img 
-    src="https://api.dicebear.com/7.x/personas/svg?seed="
+    
+    [src]="'https://api.dicebear.com/7.x/personas/svg?seed=' + name"
     style="width: 50px; height: 50px; border-radius: 50%; background-color: cyan;"
   >
-  <span style="margin-left: 10px;">Khalil Zoghlami</span>
+  <span style="margin-left: 10px;">{{name}}</span>
   <i 
+    (click)="logout()"
     class="fa-solid fa-right-from-bracket"
     style="color: red; margin-left: auto; cursor: pointer;"
   ></i>
@@ -51,3 +53,16 @@
 
   </table>
 </nav>
+<div class="bottom-settings">
+    <div class="dark-mode-card">
+      <div class="switch-label">
+        <i class="fa-solid fa-moon"></i>
+        <span>Dark Mode</span>
+      </div>
+      <label class="switch-container">
+        <input type="checkbox" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+

@@ -12,8 +12,8 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
     login(email: string, mdp: string): Observable<any> {
-    return this.http.post<any>(`${this.BaseUrl}/login.php`, { email, mdp });
-    }
+        return this.http.post<any>(`${this.BaseUrl}/login.php`,{ email, mdp },{ withCredentials: true });}
+        
     getFactures(): Observable<any> {
     return this.http.get<any>(`${this.BaseUrl}/factures.php`);
     }
@@ -44,6 +44,9 @@ export class ApiService {
     }
     supprimerFacture(facture:Facture): Observable<any>{
       return this.http.post<any>(`${this.BaseUrl}/supprimerFacture.php`, { facture})
+    }
+    editFacture(facture: Facture): Observable<any> {
+      return this.http.post<any>(`${this.BaseUrl}/editFacture.php`, { facture });
     }
 
 }

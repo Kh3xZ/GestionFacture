@@ -31,6 +31,7 @@ export class FacturesComponent implements OnInit {
   ngOnInit() {
     this.apiService.getClients().subscribe((data: Client[]) => {
       this.Clients = data;
+      console.log(this.Clients)
     });
     this.loadFactures();
     
@@ -106,8 +107,17 @@ export class FacturesComponent implements OnInit {
             error: (err) => console.error("Error adding service:", err)
       });
   }
-  modify(){
+  edit(){
+    const newFacture = {... this.factureEdit}
+     this.apiService.editFacture(newFacture).subscribe({
+      next: (res) => {
+                  this.loadFactures()
+                  this.close();
+          },
+              error: (err) => console.error("Error editing Facture:", err)
+        }
 
+     )
   }
 
 }

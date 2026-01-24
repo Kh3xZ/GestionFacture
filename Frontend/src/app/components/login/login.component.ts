@@ -20,18 +20,21 @@ export class LoginComponent {
   mdp = '';
 
   login() {
+    localStorage.removeItem('user_Name');
   this.apiService.login(this.email, this.mdp).subscribe({
-        next: (res) => {
-            if (res.success) {
-                localStorage.setItem('loggedIn', 'true');
-                this.router.navigate(['/Dashboard']);
-            } else {
-                alert('Email or password incorrect');
-            }
-        },
-        error: () => {
-            alert('Login error');
-        }
-    });
-  }
+    next: (res) => {
+      if (res.success) {
+        localStorage.setItem('user_Name', res.name);
+        localStorage.setItem('user_Email', res.email);
+        this.router.navigate(['/Factures']);
+      } else {
+        alert('Email or password incorrect');
+      }
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Login error or server not reachable');
+    }
+  });
+}
 }
