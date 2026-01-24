@@ -39,8 +39,10 @@ openClientModalEdit(client:Client){
 
   edit(){
     const newClient = {... this.clientEdit}
+    console.log(newClient)
      this.apiService.editClient(newClient).subscribe({
       next: (res) => {
+        console.log(res)
                   this.loadClients()
                   this.close();
           },
@@ -52,10 +54,44 @@ openClientModalEdit(client:Client){
   remove(){
 
   }
-  add(){
+  add() {
+  const newClient = { ...this.clientAdd};
+  console.log(newClient);
+  this.apiService.addClient(newClient).subscribe({
+    next: (res) => {
+      console.log(res);
+      this.loadClients();
+      this.close();
+    },
+    error: (err) => console.error("Error adding Client:", err)
+  });
+  this.clientAdd = {
+    email: "",
+    name: "",
+    telephone: "",
+    address: ""
+  };
+}
 
+
+  openClientModalAdd(){
+    this.modalservice.clientModal = true;
+    this.modalservice.clientType = "add";
+    this.clientAdd = {
+      email:"",
+      name:"",
+      telephone:"",
+      address:""
+    }
   }
 
-
+  delete(client:Client){
+              this.apiService.deleteClient(client).subscribe({
+              next: (res) => {
+                  this.loadClients()
+              },
+              error: (err) => console.error("Error deleting client:", err)
+        });
+    }
 
 }

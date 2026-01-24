@@ -1,4 +1,4 @@
-<button class="ajouter"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter un Client</button>
+<button class="ajouter" (click)="openClientModalAdd()"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter un Client</button>
 @if (modalservice.clientModal) {
   <div class="form-card-container">
     <div class="form-header">
@@ -10,31 +10,31 @@
         @if (modalservice.clientType == "edit"){
         <input type="text" [(ngModel)]="clientEdit.name">
         }@else{
-          <input type="text" [(ngModel)]="clientAdd.name">
+          <input type="text" [(ngModel)]="clientAdd.name" placeholder="Enter The Name">
         }
       </div>
       <div class="form-group">
-        <label>Due Date</label>
+        <label>Email</label>
         @if (modalservice.clientType == "edit"){
-        <input type="date" value="" [(ngModel)]="">
+        <input type="text" value="" [(ngModel)]="clientEdit.email">
         }@else{
-          <input type="date" [(ngModel)]="">
+          <input type="text" [(ngModel)]="clientAdd.email" placeholder="Enter The Email">
         }
       </div>
       <div class="form-group">
-        <label>Status</label>
+        <label>Address</label>
         @if (modalservice.clientType == "edit"){
-        <select [(ngModel)]="">
-          <option value="paid">Paid</option>
-          <option value="pending">Pending</option>
-          <option value="overdue">Overdue</option>
-        </select>
+          <input type="text" [(ngModel)]="clientEdit.address">
         }@else{
-          <select [(ngModel)]="">
-          <option value="paid">Paid</option>
-          <option value="pending">Pending</option>
-          <option value="overdue">Overdue</option>
-        </select>
+          <input type="text" [(ngModel)]="clientAdd.address" placeholder="Enter The Address">
+        }
+      </div>
+      <div class="form-group">
+        <label>Telephone</label>
+        @if (modalservice.clientType == "edit"){
+          <input type="text" [(ngModel)]="clientEdit.telephone">
+        }@else{
+          <input type="text" [(ngModel)]="clientAdd.telephone" placeholder="Enter The Telephone Number">
         }
       </div>
     </div>
@@ -80,7 +80,7 @@
           <td>{{client.telephone}}</td>
           <td>{{client.address}}</td>
           <td class="edit-btn" (click)="openClientModalEdit(client)"><i class="fas fa-edit"></i></td>
-          <td class="delete-btn" ><i class="fa-regular fa-trash-can"></i></td>
+          <td class="delete-btn" (click)="delete(client)"><i class="fa-regular fa-trash-can"></i></td>
         </tr>
       }
     </tbody>

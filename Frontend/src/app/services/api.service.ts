@@ -53,4 +53,11 @@ export class ApiService {
       return this.http.post<any>(`${this.BaseUrl}/editClient.php`, { client });
     }
 
+    addClient(client:Client):Observable<any> {
+      return this.http.post<any>(`${this.BaseUrl}/addClient.php`, { client });
+    }
+    deleteClient(client:Client):Observable<any> {
+      return this.http.post<any>(`${this.BaseUrl}/supprimerClient.php`, { client });
+    }
+
 }

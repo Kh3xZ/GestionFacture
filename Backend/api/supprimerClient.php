@@ -10,15 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data['client'])) {
     $client = $data['client'];
-include('../config/db.php');
+    include('../config/db.php');
 
     try {
-        $stmt = $conn->prepare("UPDATE clients SET name = ?, email = ? , telephone = ?, address = ? WHERE id = ?");
+        $stmt = $conn->prepare("DELETE FROM clients WHERE id=?");
         $stmt->execute([
-            $client['name'], 
-            $client['email'], 
-            $client['telephone'], 
-            $client['address'],
             $client['id']
         ]);
         echo json_encode(["status" => "success"]);
