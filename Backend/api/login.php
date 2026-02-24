@@ -3,8 +3,8 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use Firebase\JWT\JWT;
 
-header("Access-Control-Allow-Origin: http://localhost:4200"); // frontend origin
-header("Access-Control-Allow-Credentials: true");             // allow cookies
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
@@ -21,7 +21,7 @@ $mdp   = $data['mdp'] ?? '';
 
 include('../config/db.php');
 
-$stmt = $conn->prepare("SELECT id, name, email, password_hash FROM users WHERE email = ?");
+$stmt = $conn->prepare("SELECT id, name, email, password_hash, role FROM users WHERE email = ?");
 $stmt->execute([$email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -49,9 +49,9 @@ setcookie(
     [
         "expires" => time() + 3600,
         "path" => "/",
-        "secure" => false,   // ok for localhost
+        "secure" => false,
         "httponly" => true,
-        "samesite" => "Lax"  // change from Strict → Lax allows sending cookie on cross-origin GET
+        "samesite" => "Lax"
     ]
 );
 
@@ -59,5 +59,6 @@ setcookie(
 echo json_encode([
     "success" => true,
     "name" => $user['name'],
-    "email" => $user['email']
+    "email" => $user['email'],
+    "role" => $user['role']
 ]);

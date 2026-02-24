@@ -1,0 +1,185 @@
+
+@if (isLoading) {
+  <div class="loading-container">
+    <div class="loading-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+    <p>Chargement du tableau de bord...</p>
+  </div>
+}
+
+@if (!isLoading) {
+  <div class="dashboard-wrapper">
+
+    
+    <div class="dashboard-header">
+      <div class="header-title">
+        <h1><i class="fa-solid fa-chart-line"></i> Tableau de Bord</h1>
+      </div>
+      <a routerLink="/Factures" class="ajouter">
+        <i class="fa-solid fa-plus"></i> Nouvelle Facture
+      </a>
+    </div>
+
+    
+    <div class="kpi-grid">
+
+      <div class="kpi-card kpi-blue">
+        <div class="kpi-icon">
+          <i class="fa-solid fa-file-invoice"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-label">Total Factures</span>
+          <span class="kpi-value">{{ totalFactures }}</span>
+        </div>
+        <a routerLink="/Factures" class="kpi-link">Voir tout <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="kpi-card kpi-green">
+        <div class="kpi-icon">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-label">Revenu Total</span>
+          <span class="kpi-value">{{ totalRevenue | number:'1.2-2' }} DT</span>
+        </div>
+        <span class="kpi-sub">Factures payées uniquement</span>
+      </div>
+
+      <div class="kpi-card kpi-purple">
+        <div class="kpi-icon">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-label">Total Clients</span>
+          <span class="kpi-value">{{ totalClients }}</span>
+        </div>
+        <a routerLink="/Clients" class="kpi-link">Voir tout <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="kpi-card kpi-orange">
+        <div class="kpi-icon">
+          <i class="fa-solid fa-calendar-minus"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-label">En Retard</span>
+          <span class="kpi-value">{{ overdueCount }}</span>
+        </div>
+        <span class="kpi-sub">Factures en souffrance</span>
+      </div>
+
+    </div>
+
+    
+    <div class="dashboard-body">
+
+      
+      <div class="status-card">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-chart-pie"></i> Répartition par Statut</h2>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">
+            <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i>
+            <span>Payées</span>
+            <span class="status-count">{{ paidCount }}</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill paid" [style.width.%]="getPaidPercent()"></div>
+          </div>
+          <span class="status-percent">{{ getPaidPercent() }}%</span>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">
+            <i class="fa-solid fa-spinner" style="color: #f97316;"></i>
+            <span>En attente</span>
+            <span class="status-count">{{ pendingCount }}</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill pending" [style.width.%]="getPendingPercent()"></div>
+          </div>
+          <span class="status-percent">{{ getPendingPercent() }}%</span>
+        </div>
+
+        <div class="status-item">
+          <div class="status-label">
+            <i class="fa-solid fa-calendar-minus" style="color: tomato;"></i>
+            <span>En retard</span>
+            <span class="status-count">{{ overdueCount }}</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill overdue" [style.width.%]="getOverduePercent()"></div>
+          </div>
+          <span class="status-percent">{{ getOverduePercent() }}%</span>
+        </div>
+
+        
+        <div class="donut-summary">
+          <div class="donut-item paid-dot">
+            <span class="dot"></span>
+            <span>Payées</span>
+            <strong>{{ paidCount }}</strong>
+          </div>
+          <div class="donut-item pending-dot">
+            <span class="dot"></span>
+            <span>En attente</span>
+            <strong>{{ pendingCount }}</strong>
+          </div>
+          <div class="donut-item overdue-dot">
+            <span class="dot"></span>
+            <span>En retard</span>
+            <strong>{{ overdueCount }}</strong>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="recent-card">
+        <div class="card-header">
+          <h2><i class="fa-solid fa-clock-rotate-left"></i> Factures Récentes</h2>
+          <a routerLink="/Factures" class="see-all">Voir tout <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        @if (recentFactures.length === 0) {
+          <div class="empty-state">
+            <i class="fa-solid fa-file-circle-xmark"></i>
+            <p>Aucune facture trouvée</p>
+          </div>
+        }
+
+        <div class="recent-list">
+          @for (facture of recentFactures; track facture.id) {
+            <div class="recent-item" [routerLink]="['/Factures/Facture', facture.id]">
+              <div class="recent-avatar">
+                {{ facture.client_name?.charAt(0)?.toUpperCase() }}
+              </div>
+              <div class="recent-info">
+                <span class="recent-client">{{ facture.client_name }}</span>
+                <span class="recent-date">{{ facture.issue_date | date:'dd MMM yyyy' }}</span>
+              </div>
+              <div class="recent-right">
+                <span class="recent-amount">{{ facture.total_amount | number:'1.2-2' }} DT</span>
+                <span class="status-badge"
+                  [class.badge-paid]="facture.status === 'paid'"
+                  [class.badge-pending]="facture.status === 'pending'"
+                  [class.badge-overdue]="facture.status === 'overdue'">
+                  @if(facture.status === 'pending') {
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                  } @else if (facture.status === 'paid') {
+                    <i class="fa-solid fa-circle-check"></i>
+                  } @else {
+                    <i class="fa-solid fa-calendar-minus"></i>
+                  }
+                  {{ facture.status }}
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+}

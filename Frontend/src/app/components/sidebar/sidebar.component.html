@@ -1,55 +1,51 @@
-<div class="user-information">
-    <div style="display: flex; align-items: center; padding: 10px;">
-  <img 
-    
-    [src]="'https://api.dicebear.com/7.x/personas/svg?seed=' + name"
-    style="width: 25%; height: 25%; border-radius: 50%; background-color: cyan;"
-  >
-  <span style="margin-left: 10px;font-size: 110%;">{{name}}</span>
-  <i 
-    (click)="logout()"
-    class="fa-solid fa-right-from-bracket"
-    style="color: red; margin-left: auto; cursor: pointer;font-size: 110%;"
-  ></i>
-</div>
-</div>
 <nav class="sidebar-menu">
-  <table style="width: 95%;font-size: 150%;"> 
-    <tr routerLink="Dashboard"
-        routerLinkActive="active-link">
-      <td>
-        <span class="icon"><i class="fa-solid fa-chart-line"></i></span>
-      </td>
-      <td>
-        <span class="text">Dashboard</span>
-      </td>
-    </tr>
-    <tr routerLink="Factures" routerLinkActive="active-link">
-      <td>
-        <span class="icon"><i class="fa-solid fa-file-invoice"></i></span>
-      </td>
-      <td>
-        <span class="text">Factures</span>
-      </td>
-    </tr>
-    <tr routerLink="Clients" routerLinkActive="active-link">
-      <td>
-        <span class="icon"><i class="fa-solid fa-people-group"></i></span>
-      </td>
-      <td>
-        <span class="text">Clients</span>
-      </td>
-    </tr>
 
-    <tr routerLink="Courses" routerLinkActive="active-link">
-      <td>
-        <span class="icon"><i class="fa-solid fa-book"></i></span>
-      </td>
-      <td>
-        <span class="text">My Courses</span>
-      </td>
-    </tr>
+  
+  <div class="user-profile-card">
+    <div class="user-avatar-wrapper">
+      <img
+        [src]="'https://api.dicebear.com/7.x/personas/svg?seed=' + name"
+        [alt]="name + ' avatar'"
+      >
+      <span class="avatar-online-dot"></span>
+    </div>
+    <div class="user-details">
+      <span class="user-name">{{ name }}</span>
+      <span class="user-role">{{ role }}</span>
+    </div>
+    <div class="logout-btn" (click)="logout()" title="Se déconnecter">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </div>
 
+  
+  <div class="sidebar-nav">
+    <table style="width: 95%; font-size: 150%;">
+      <tr routerLink="Dashboard" routerLinkActive="active-link">
+        <td>
+          <span class="icon"><i class="fa-solid fa-chart-line"></i></span>
+        </td>
+        <td>
+          <span class="text">Tableau de Bord</span>
+        </td>
+      </tr>
+      <tr routerLink="Factures" routerLinkActive="active-link">
+        <td>
+          <span class="icon"><i class="fa-solid fa-file-invoice"></i></span>
+        </td>
+        <td>
+          <span class="text">Factures</span>
+        </td>
+      </tr>
+      <tr routerLink="Clients" routerLinkActive="active-link">
+        <td>
+          <span class="icon"><i class="fa-solid fa-people-group"></i></span>
+        </td>
+        <td>
+          <span class="text">Clients</span>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-  </table>
 </nav>

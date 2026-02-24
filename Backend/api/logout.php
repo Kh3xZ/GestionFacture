@@ -9,12 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Expire the cookie
 setcookie(
     "token",
     "",
     [
-        "expires" => time() - 3600, // past time → delete cookie
+        "expires" => time() - 3600,
         "path" => "/",
         "secure" => false,
         "httponly" => true,

@@ -1,96 +1,128 @@
-<button (click)="openAjouter()" class="ajouter"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter une Service</button>
-  @if (modalservice.serviceModal){
-  <div class="form-card-container">
-    <div class="form-header">
-      <h3><i class="fas fa-file-invoice"></i> Détails de la Service</h3>
-    </div>
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Service Name</label>
-        @if (modalservice.serviceType=="edit") {
-        <input type="text" value="{{serviceEdit.service}}" name="name" [(ngModel)]="serviceEdit.service">
-        }@else{
-            <input type="text" placeholder="Name of the Service" name="name" [(ngModel)]="serviceAdd.service">
-          }
-      </div>
+<div class="page-wrapper">
 
-      <div class="form-group">
-        <label>Description</label>
-        @if (modalservice.serviceType=="edit") {
-        <input type="text" value="{{serviceEdit.description}}" name="description" [(ngModel)]="serviceEdit.description">
-         }@else{
-            <input type="text" placeholder="Description of the Service" name="description" [(ngModel)]="serviceAdd.description">
-          }
+  
+  <div class="top-bar">
+    <h1 class="page-title">
+      <i class="fa-solid fa-file-invoice"></i> Détails de la Facture
+    </h1>
+    <div class="top-bar-right">
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Rechercher un service..."
+          [(ngModel)]="searchQuery"
+        >
       </div>
-
-      <div class="form-group">
-        <label>Type</label>
-        @if (modalservice.serviceType=="edit") {
-        <input type="text" value="{{serviceEdit.type}}" name="type" [(ngModel)]="serviceEdit.type">
-         }@else{
-            <input type="text" placeholder="Type of the Service" name="type" [(ngModel)]="serviceAdd.type">
-          }
-      </div>
-
-      <div class="form-group">
-        <label>Price</label>
-        <div class="input-with-icon">
-          @if (modalservice.serviceType=="edit") {
-            <input type="text" value="{{serviceEdit.prix}}" name="prix" [(ngModel)]="serviceEdit.prix">
-          }@else{
-            <input type="text" placeholder="0.00" name="prix" [(ngModel)]="serviceAdd.prix">
-          }
-          <span class="currency-label">Dt</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      @if (modalservice.serviceType=="edit"){
-        <button type="button" class="submit-btn" (click)="modifier()">
-        <i class="fas fa-check"></i> Confirmer
-        </button>
-      }@else{
-        <button type="button" class="submit-btn" (click)="ajouter()">
-        <i class="fas fa-check"></i> Confirmer
-        </button>
-      }
-      
-      <button type="button" class="close-btn" (click)="close()">
-        <i class="fas fa-times"></i> Annuler
+      <button class="ajouter" (click)="openAjouter()">
+        <i class="fa-solid fa-plus"></i> Ajouter un Service
       </button>
     </div>
   </div>
-}
 
-<div class="table-container">
-<table class="custom-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>ID</th>
-        <th>Service</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Prix</th>
-        <th>Modifier</th>
-        <th>Supprimer</th>
-      </tr>
-    </thead>
+  
+  @if (modalservice.serviceModal) {
+    <div class="form-card-container">
+      <div class="form-header">
+        <h3><i class="fas fa-screwdriver-wrench"></i> Détails du Service</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nom du Service</label>
+          @if (modalservice.serviceType == "edit") {
+            <input type="text" [(ngModel)]="serviceEdit.service">
+          } @else {
+            <input type="text" placeholder="Nom du service" [(ngModel)]="serviceAdd.service">
+          }
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          @if (modalservice.serviceType == "edit") {
+            <input type="text" [(ngModel)]="serviceEdit.description">
+          } @else {
+            <input type="text" placeholder="Description du service" [(ngModel)]="serviceAdd.description">
+          }
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          @if (modalservice.serviceType == "edit") {
+            <input type="text" [(ngModel)]="serviceEdit.type">
+          } @else {
+            <input type="text" placeholder="Type du service" [(ngModel)]="serviceAdd.type">
+          }
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <div class="input-with-icon">
+            @if (modalservice.serviceType == "edit") {
+              <input type="text" [(ngModel)]="serviceEdit.prix">
+            } @else {
+              <input type="text" placeholder="0.00" [(ngModel)]="serviceAdd.prix">
+            }
+            <span class="currency-label">DT</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        @if (modalservice.serviceType == "edit") {
+          <button type="button" class="submit-btn" (click)="modifier()">
+            <i class="fas fa-check"></i> Confirmer
+          </button>
+        } @else {
+          <button type="button" class="submit-btn" (click)="ajouter()">
+            <i class="fas fa-check"></i> Confirmer
+          </button>
+        }
+        <button type="button" class="close-btn" (click)="close()">
+          <i class="fas fa-times"></i> Annuler
+        </button>
+      </div>
+    </div>
+  }
 
-    <tbody>
-      @for (service of services; track service.id) {
+  
+  <div class="table-container">
+    <table class="custom-table">
+      <thead>
         <tr>
-          <td>{{$index+1}}</td>
-          <th>{{service.id}}</th>
-          <td>{{service.service}}</td>
-          <td>{{service.description}}</td>
-          <td>{{service.type}}</td>
-          <td>{{service.prix}}&nbsp;DT</td>
-          <td class="edit-btn" (click)="openEditSection(service)"><i class="fas fa-edit"></i></td>
-          <td class="delete-btn" (click)="supprimer(service)"><i class="fa-regular fa-trash-can"></i></td>
+          <th>#</th>
+          <th>ID</th>
+          <th>Service</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Prix</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (service of filteredServices(); track service.id) {
+          <tr>
+            <td class="row-num">{{ $index + 1 }}</td>
+            <td>{{ service.id }}</td>
+            <td>{{ service.service }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.type }}</td>
+            <td class="amount-cell">{{ service.prix }}&nbsp;DT</td>
+            <td (click)="openEditSection(service)">
+              <span class="edit-btn"><i class="fas fa-edit"></i></span>
+            </td>
+            <td (click)="supprimer(service)">
+              <span class="delete-btn"><i class="fa-regular fa-trash-can"></i></span>
+            </td>
+          </tr>
+        }
+        @if (filteredServices().length === 0) {
+          <tr class="empty-row">
+            <td colspan="8">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              Aucun service trouvé
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
 </div>

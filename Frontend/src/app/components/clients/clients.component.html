@@ -1,88 +1,130 @@
-<button class="ajouter" (click)="openClientModalAdd()"><i class="fa-solid fa-plus" style="font-size: 16px;"></i> Ajouter un Client</button>
-@if (modalservice.clientModal) {
-  <div class="form-card-container">
-    <div class="form-header">
-      <h3><i class="fas fa-file-invoice"></i> Détails de la Facture</h3>
-    </div>
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Name</label>
-        @if (modalservice.clientType == "edit"){
-        <input type="text" [(ngModel)]="clientEdit.name">
-        }@else{
-          <input type="text" [(ngModel)]="clientAdd.name" placeholder="Enter The Name">
-        }
+<div class="page-wrapper">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <h1 class="page-title">
+      <i class="fa-solid fa-people-group"></i> Clients
+    </h1>
+    <div class="top-bar-right">
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Rechercher un client..."
+          [(ngModel)]="searchQuery"
+        >
       </div>
-      <div class="form-group">
-        <label>Email</label>
-        @if (modalservice.clientType == "edit"){
-        <input type="text" value="" [(ngModel)]="clientEdit.email">
-        }@else{
-          <input type="text" [(ngModel)]="clientAdd.email" placeholder="Enter The Email">
-        }
-      </div>
-      <div class="form-group">
-        <label>Address</label>
-        @if (modalservice.clientType == "edit"){
-          <input type="text" [(ngModel)]="clientEdit.address">
-        }@else{
-          <input type="text" [(ngModel)]="clientAdd.address" placeholder="Enter The Address">
-        }
-      </div>
-      <div class="form-group">
-        <label>Telephone</label>
-        @if (modalservice.clientType == "edit"){
-          <input type="text" [(ngModel)]="clientEdit.telephone">
-        }@else{
-          <input type="text" [(ngModel)]="clientAdd.telephone" placeholder="Enter The Telephone Number">
-        }
-      </div>
-    </div>
-    <div class="form-actions">
-      @if (modalservice.clientType == "edit"){
-        <button type="button" class="submit-btn" (click)="edit()">
-        <i class="fas fa-check"></i> Confirmer
-      </button>
-      }@else{
-        <button type="button" class="submit-btn" (click)="add()">
-        <i class="fas fa-check"></i> Confirmer
-      </button>
-      }
-      <button type="button" class="close-btn" (click)="close()">
-        <i class="fas fa-times"></i> Annuler
+      <button class="ajouter" (click)="openClientModalAdd()">
+        <i class="fa-solid fa-plus"></i> Ajouter un Client
       </button>
     </div>
   </div>
-}
 
-<div class="table-container">
-<table class="custom-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Telephone</th>
-        <th>Adress</th>
-        <th>Modifier</th>
-        <th>Supprimer</th>
-      </tr>
-    </thead>
+  <!-- Form Card -->
+  @if (modalservice.clientModal) {
+    <div class="form-card-container">
+      <div class="form-header">
+        <h3><i class="fas fa-user"></i> Détails du Client</h3>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nom</label>
+          @if (modalservice.clientType == "edit") {
+            <input type="text" [(ngModel)]="clientEdit.name">
+          } @else {
+            <input type="text" [(ngModel)]="clientAdd.name" placeholder="Entrez le nom">
+          }
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          @if (modalservice.clientType == "edit") {
+            <input type="text" [(ngModel)]="clientEdit.email">
+          } @else {
+            <input type="text" [(ngModel)]="clientAdd.email" placeholder="Entrez l'email">
+          }
+        </div>
+        <div class="form-group">
+          <label>Adresse</label>
+          @if (modalservice.clientType == "edit") {
+            <input type="text" [(ngModel)]="clientEdit.address">
+          } @else {
+            <input type="text" [(ngModel)]="clientAdd.address" placeholder="Entrez l'adresse">
+          }
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          @if (modalservice.clientType == "edit") {
+            <input type="text" [(ngModel)]="clientEdit.telephone">
+          } @else {
+            <input type="text" [(ngModel)]="clientAdd.telephone" placeholder="Entrez le numéro de téléphone">
+          }
+        </div>
+      </div>
+      <div class="form-actions">
+        @if (modalservice.clientType == "edit") {
+          <button type="button" class="submit-btn" (click)="edit()">
+            <i class="fas fa-check"></i> Confirmer
+          </button>
+        } @else {
+          <button type="button" class="submit-btn" (click)="add()">
+            <i class="fas fa-check"></i> Confirmer
+          </button>
+        }
+        <button type="button" class="close-btn" (click)="close()">
+          <i class="fas fa-times"></i> Annuler
+        </button>
+      </div>
+    </div>
+  }
 
-    <tbody>
-      @for (client of clients; track client.id) {
+  <!-- Table -->
+  <div class="table-container">
+    <table class="custom-table">
+      <thead>
         <tr>
-          <td>{{$index+1}}</td>
-          <th>{{client.id}}</th>
-          <td>{{client.name}}</td>
-          <td>{{client.email}}</td>
-          <td>{{client.telephone}}</td>
-          <td>{{client.address}}</td>
-          <td class="edit-btn" (click)="openClientModalEdit(client)"><i class="fas fa-edit"></i></td>
-          <td class="delete-btn" (click)="delete(client)"><i class="fa-regular fa-trash-can"></i></td>
+          <th>#</th>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Adresse</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (client of filteredClients(); track client.id) {
+          <tr>
+            <td class="row-num">{{ $index + 1 }}</td>
+            <td>{{ client.id }}</td>
+            <td>
+              <div class="client-name-cell">
+                <span class="client-avatar">{{ client.name?.charAt(0)?.toUpperCase() }}</span>
+                {{ client.name }}
+              </div>
+            </td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.telephone }}</td>
+            <td>{{ client.address }}</td>
+            <td (click)="openClientModalEdit(client)">
+              <span class="edit-btn"><i class="fas fa-edit"></i></span>
+            </td>
+            <td (click)="delete(client)">
+              <span class="delete-btn"><i class="fa-regular fa-trash-can"></i></span>
+            </td>
+          </tr>
+        }
+        @if (filteredClients().length === 0) {
+          <tr class="empty-row">
+            <td colspan="8">
+              <i class="fa-solid fa-user-slash"></i>
+              Aucun client trouvé
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
 </div>
