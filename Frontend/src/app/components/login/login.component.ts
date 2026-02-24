@@ -24,7 +24,7 @@ export class LoginComponent {
           localStorage.setItem('user_Name', res.name);
           localStorage.setItem('user_Email', res.email);
           localStorage.setItem('user_Role', res.role);
-          this.router.navigate(['/Factures']);
+          this.router.navigate(['/Dashboard']);
         } else {
           alert('Email or password incorrect');
         }
