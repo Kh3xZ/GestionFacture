@@ -1,4 +1,4 @@
-/* ===== Container - split layout ===== */
+
 .auth-container {
   background-image: url("../../../../public/blue-background-dark-blue-abstract-background-geometry-shine-and-layer-element-for-presentation-design-vector.jpg");
   background-size: cover;
@@ -12,13 +12,12 @@
   display: flex;
 }
 
-/* ===== Left side - background image ===== */
 .auth-left {
   flex: 1;
   
 }
 
-/* ===== Right side - form panel ===== */
+
 .auth-right {
   opacity: 0.90;
   width: 600px;
@@ -31,7 +30,6 @@
   box-sizing: border-box;
 }
 
-/* ===== Form Card ===== */
 .auth-card {
   width: 100%;
   display: flex;
@@ -39,7 +37,6 @@
   gap: 24px;
 }
 
-/* ===== Title ===== */
 .auth-card h2 {
   font-size: 40px;
   font-weight: 800;
@@ -60,7 +57,7 @@
   font-weight: 500;
 }
 
-/* ===== Input Wrapper ===== */
+
 .input-wrapper {
   position: relative;
   display: flex;
@@ -95,7 +92,6 @@
   pointer-events: none;
 }
 
-/* ===== Button ===== */
 .login-btn {
   padding: 14px;
   border: none;
@@ -111,7 +107,7 @@
 
 .login-btn:hover { background: #1d4ed8; }
 
-/* ===== Note ===== */
+
 .auth-note {
   color: white;
   font-size: 16px;

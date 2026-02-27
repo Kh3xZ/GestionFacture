@@ -9,7 +9,7 @@ import { Client } from '../models/client.model';
   providedIn: 'root'
 })
 export class ApiService {
-  private BaseUrl = 'http://localhost/GestionFacture/Backend/api';
+  private BaseUrl = 'http://localhost/ttt/Backend/api';
   constructor(private http: HttpClient) {}
 
     login(email: string, mdp: string): Observable<any> {
