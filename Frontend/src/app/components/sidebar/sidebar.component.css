@@ -63,7 +63,7 @@
 }
 
 .sidebar-menu .text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .user-name {
-  font-size: 17px;
+  font-size: 13px;
   font-weight: 700;
   color: #F5F5F5;
   white-space: nowrap;
@@ -122,7 +122,7 @@
 }
 
 .user-role {
-  font-size: 13px;
+  font-size: 12px;
   color: #aaa;
 }
 

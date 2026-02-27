@@ -6,7 +6,7 @@ import { Observable, map, catchError, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private BaseUrl = 'http://localhost/GestionFacture/Backend/api'; // change if needed
+  private BaseUrl = 'http://localhost/ttt/Backend/api';
 
   constructor(private http: HttpClient) {}
 
@@ -14,7 +14,7 @@ export class AuthService {
     return this.http.get<{ loggedIn: boolean }>(`${this.BaseUrl}/me.php`, { withCredentials: true })
       .pipe(
         map(res => res.loggedIn === true),
-        catchError(() => of(false)) // if 401 or error → return false
+        catchError(() => of(false))
       );
   }
   logout(): Observable<any> {
