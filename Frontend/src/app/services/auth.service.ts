@@ -6,7 +6,7 @@ import { Observable, map, catchError, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private BaseUrl = 'http://localhost/ttt/Backend/api';
+  private BaseUrl = 'http://localhost/GestionFacture/Backend/api';
 
   constructor(private http: HttpClient) {}
 

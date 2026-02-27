@@ -161,7 +161,7 @@
 
 .recent-card{
   overflow-y: auto;
-  height: 350px;
+  height: calc(100vh - 400px);
   
 }
 .status-card,
