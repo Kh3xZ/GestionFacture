@@ -13,7 +13,7 @@ if (isset($data['service'])) {
     include('../config/db.php');
 
     try {
-        $stmt = $conn->prepare("DELETE FROM facture_detail WHERE id=?");
+        $stmt = $conn->prepare("DELETE FROM facture_details WHERE id=?");
         $stmt->execute([
             $service['id']
         ]);
